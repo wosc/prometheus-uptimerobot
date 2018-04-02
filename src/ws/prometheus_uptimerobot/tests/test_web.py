@@ -11,10 +11,10 @@ import ws.prometheus_uptimerobot.web
 def fake_response():
     with mock.patch(
             'ws.prometheus_uptimerobot.web.UptimeRobotCollector'
-            '._get_monitors') as monitors:
-        monitors.return_value = json.loads(pkg_resources.resource_string(
-            __name__, 'response.json').decode('utf-8'))['monitors']
-        yield monitors
+            '._get_paginated') as page:
+        page.return_value = json.loads(pkg_resources.resource_string(
+            __name__, 'response.json').decode('utf-8'))
+        yield page
 
 
 @pytest.fixture
@@ -34,3 +34,5 @@ def test_converts_api_data_to_metrics(fake_response, testbrowser):
     assert 'monitor_name="example.com"' in metrics
     assert 'monitor_name="IMAP"' in metrics
     assert 'monitor_name="SMTP"' in metrics
+
+    assert fake_response.call_args_list == [mock.call(0), mock.call(50)]

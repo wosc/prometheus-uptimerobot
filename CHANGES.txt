@@ -4,7 +4,7 @@ CHANGES
 1.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Support pagination of API results.
 
 
 1.0.0 (2018-04-01)

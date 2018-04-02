@@ -97,12 +97,24 @@ class UptimeRobotCollector(object):
             raise
 
     def _get_monitors(self):
+        result = []
+        response = self._get_paginated(0)
+        result.extend(response.get('monitors', ()))
+        seen = response['pagination']['limit']
+        while response['pagination']['total'] > seen:
+            response = self._get_paginated(seen)
+            result.extend(response.get('monitors', ()))
+            seen += response['pagination']['limit']
+        return result
+
+    def _get_paginated(self, offset):
         return requests.post(self.API_URL + '/getMonitors', data={
             'api_key': self.api_key,
             'format': 'json',
+            'offset': offset,
             'response_times': '1',  # enable
             'response_times_limit': '1',  # just the latest one
-        }).json().get('monitors', ())
+        }).json()
 
 
 COLLECTOR = UptimeRobotCollector()
