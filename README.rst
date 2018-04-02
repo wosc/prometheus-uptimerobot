@@ -2,6 +2,9 @@
 prometheus metrics for uptimerobot.com
 ======================================
 
+.. image:: https://travis-ci.org/wosc/prometheus-uptimerobot.png
+   :target: https://travis-ci.org/wosc/prometheus-uptimerobot
+
 This packages exports `Uptime Robot`_ monitor results as `Prometheus`_ metrics.
 
 .. _`Uptime Robot`: https://uptimerobot.com

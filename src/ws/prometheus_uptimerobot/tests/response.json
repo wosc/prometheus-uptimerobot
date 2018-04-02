@@ -1,0 +1,118 @@
+{
+  "stat": "ok",
+  "pagination": {
+    "total": 5,
+    "limit": 50,
+    "offset": 0
+  },
+  "monitors": [
+    {
+      "status": 2,
+      "create_datetime": 1522483232,
+      "http_password": "",
+      "http_username": "",
+      "url": "example.com",
+      "interval": 300,
+      "friendly_name": "host ping",
+      "sub_type": "",
+      "port": "",
+      "ssl": {
+        "brand": "",
+        "expires": 0,
+        "product": null
+      },
+      "keyword_value": "",
+      "keyword_type": "",
+      "response_times": [
+        {
+          "value": 125,
+          "datetime": 1522604315
+        }
+      ],
+      "type": 3,
+      "id": 780189779,
+      "average_response_time": "138.571"
+    },
+    {
+      "status": 2,
+      "create_datetime": 1522483294,
+      "http_password": "",
+      "http_username": "",
+      "url": "https://example.com/",
+      "interval": 300,
+      "friendly_name": "example.com",
+      "sub_type": "",
+      "port": "",
+      "ssl": {
+        "brand": "Let's Encrypt",
+        "expires": 1529842924,
+        "product": "Let's Encrypt Authority X3"
+      },
+      "keyword_value": "",
+      "keyword_type": "",
+      "response_times": [
+        {
+          "value": 594,
+          "datetime": 1522603695
+        }
+      ],
+      "type": 1,
+      "id": 780189783,
+      "average_response_time": "554.160"
+    },
+    {
+      "status": 2,
+      "create_datetime": 1522483392,
+      "http_password": "",
+      "http_username": "",
+      "url": "mail.example.com",
+      "interval": 300,
+      "friendly_name": "IMAP",
+      "sub_type": 6,
+      "port": 143,
+      "ssl": {
+        "brand": "",
+        "expires": 0,
+        "product": null
+      },
+      "keyword_value": "",
+      "keyword_type": "",
+      "response_times": [
+        {
+          "value": 125,
+          "datetime": 1522605119
+        }
+      ],
+      "type": 4,
+      "id": 780189789,
+      "average_response_time": "133.132"
+    },
+    {
+      "status": 2,
+      "create_datetime": 1522483370,
+      "http_password": "",
+      "http_username": "",
+      "url": "mail.example.com",
+      "interval": 300,
+      "friendly_name": "SMTP",
+      "sub_type": 4,
+      "port": 25,
+      "ssl": {
+        "brand": "",
+        "expires": 0,
+        "product": null
+      },
+      "keyword_value": "",
+      "keyword_type": "",
+      "response_times": [
+        {
+          "value": 125,
+          "datetime": 1522605134
+        }
+      ],
+      "type": 4,
+      "id": 780189788,
+      "average_response_time": "131.016"
+    }
+  ]
+}

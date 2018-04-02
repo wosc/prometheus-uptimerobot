@@ -14,6 +14,12 @@ setup(
         'setuptools',
     ],
 
+    extras_require={'test': [
+        'mock',
+        'pytest',
+        'werkzeug',
+    ]},
+
     entry_points={
         'console_scripts': [
             'uptimerobot_exporter_cgi = ws.prometheus_uptimerobot.web:cgi',

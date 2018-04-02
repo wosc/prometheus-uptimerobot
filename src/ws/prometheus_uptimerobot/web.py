@@ -75,13 +75,8 @@ class UptimeRobotCollector(object):
             # race conditions with simultaneous scrapes.
             metrics = {
                 key: value.clone() for key, value in self.METRICS.items()}
-            response = requests.post(self.API_URL + '/getMonitors', data={
-                'api_key': self.api_key,
-                'format': 'json',
-                'response_times': '1',  # enable
-                'response_times_limit': '1',  # just the latest one
-            }).json()
-            for monitor in response['monitors']:
+            monitors = self._get_monitors()
+            for monitor in monitors:
                 labels = {
                     'monitor_name': monitor['friendly_name'],
                     'monitor_type': self.MONITOR_TYPES[monitor['type']],
@@ -99,6 +94,15 @@ class UptimeRobotCollector(object):
             return metrics.values()
         except Exception:
             log.error('Error during collect', exc_info=True)
+            raise
+
+    def _get_monitors(self):
+        return requests.post(self.API_URL + '/getMonitors', data={
+            'api_key': self.api_key,
+            'format': 'json',
+            'response_times': '1',  # enable
+            'response_times_limit': '1',  # just the latest one
+        }).json().get('monitors', ())
 
 
 COLLECTOR = UptimeRobotCollector()
