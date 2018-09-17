@@ -35,4 +35,6 @@ def test_converts_api_data_to_metrics(fake_response, testbrowser):
     assert 'monitor_name="IMAP"' in metrics
     assert 'monitor_name="SMTP"' in metrics
 
+    assert 'uptimerobot_ssl_expire{monitor_name="example.com"' in metrics
+
     assert fake_response.call_args_list == [mock.call(0), mock.call(50)]
