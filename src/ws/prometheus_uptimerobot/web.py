@@ -93,8 +93,8 @@ class UptimeRobotCollector(object):
                     metrics['responsetime'](responsetime, labels)
                 ssl = monitor.get('ssl', ())
                 if ssl['product']:
-                  ssl_expire = ssl['expires']
-                  metrics['ssl'](ssl_expire, labels)
+                    ssl_expire = ssl['expires']
+                    metrics['ssl'](ssl_expire, labels)
 
             metrics['scrape_duration_seconds'](time.time() - start)
             return metrics.values()
