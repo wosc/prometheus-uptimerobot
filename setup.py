@@ -6,7 +6,7 @@ import glob
 
 setup(
     name='ws.prometheus_uptimerobot',
-    version='1.1.1.dev2',
+    version='1.1.0',
 
     install_requires=[
         'prometheus_client',

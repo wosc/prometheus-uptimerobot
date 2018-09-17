@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-1.1.0 (unreleased)
+1.1.0 (2018-09-17)
 ------------------
 
 - Add ssl expiration metrics
