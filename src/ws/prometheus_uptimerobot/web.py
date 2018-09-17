@@ -91,8 +91,8 @@ class UptimeRobotCollector(object):
                     # milliseconds
                     responsetime = responsetime[0]['value'] / 1000.0
                     metrics['responsetime'](responsetime, labels)
-                ssl = monitor.get('ssl', ())
-                if ssl['product']:
+                ssl = monitor.get('ssl', {})
+                if ssl.get('product'):
                     ssl_expire = ssl['expires']
                     metrics['ssl'](ssl_expire, labels)
 
