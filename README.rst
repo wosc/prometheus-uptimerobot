@@ -59,6 +59,7 @@ The following metrics are exported, each with labels ``{monitor_name="example.co
 * ``uptimerobot_up`` gauge (1=up, 0=down)
 * ``uptimerobot_status`` gauge
 * ``uptimerobot_responsetime`` gauge
+* ``uptimerobot_ssl_expire`` gauge (unix timestamp), if applicable
 
 See the `Uptime Robot API documentation`_ section "Parameters" for details on
 the possible ``status`` values. The ``monitor_type`` is translated from its

@@ -61,6 +61,7 @@ class UptimeRobotCollector(object):
         'status': Gauge('status', 'Numeric status of the monitor'),
         'responsetime': Gauge(
             'responsetime', 'Most recent monitor responsetime'),
+        'ssl': Gauge('ssl_expire', 'Date of cert expiration'),
         'scrape_duration_seconds': Gauge(
             'scrape_duration_seconds', 'Duration of uptimerobot.com scrape'),
     }
@@ -90,6 +91,11 @@ class UptimeRobotCollector(object):
                     # milliseconds
                     responsetime = responsetime[0]['value'] / 1000.0
                     metrics['responsetime'](responsetime, labels)
+                ssl = monitor.get('ssl', {})
+                if ssl.get('product'):
+                    ssl_expire = ssl['expires']
+                    metrics['ssl'](ssl_expire, labels)
+
             metrics['scrape_duration_seconds'](time.time() - start)
             return metrics.values()
         except Exception:
