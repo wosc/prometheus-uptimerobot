@@ -25,14 +25,8 @@ class Gauge(prometheus_client.core.GaugeMetricFamily):
 
     def __init__(self, name, documentation):
         super(Gauge, self).__init__(
-            '%s_%s' % (self.NAMESPACE, name), documentation)
+            '%s_%s' % (self.NAMESPACE, name), documentation, labels=['monitor_name', 'monitor_type', 'monitor_url'])
         self._name = name
-
-    def __call__(self, value, labels=None):
-        # add_metric() taking a list is not very pythonic, let's use a dict
-        if labels is None:
-            labels = {}
-        self.samples.append((self.name, labels, value))
 
     def clone(self):
         return type(self)(self._name, self.documentation)
@@ -78,25 +72,22 @@ class UptimeRobotCollector(object):
                 key: value.clone() for key, value in self.METRICS.items()}
             monitors = self._get_monitors()
             for monitor in monitors:
-                labels = {
-                    'monitor_name': monitor['friendly_name'],
-                    'monitor_type': self.MONITOR_TYPES[monitor['type']],
-                    'monitor_url': monitor['url'],
-                }
+                labels_values = [monitor['friendly_name'], self.MONITOR_TYPES[monitor['type']], monitor['url']]
                 status = monitor.get('status', 1)
-                metrics['up'](1 if status == self.STATUS_UP else 0, labels)
-                metrics['status'](status, labels)
+                metrics['up'].add_metric(labels_values, 1 if status == self.STATUS_UP else 0)
+                metrics['status'].add_metric(labels_values, status)
                 responsetime = monitor.get('response_times', ())
                 if responsetime:
                     # milliseconds
                     responsetime = responsetime[0]['value'] / 1000.0
-                    metrics['responsetime'](responsetime, labels)
+                    metrics['responsetime'].add_metric(labels_values, responsetime)
                 ssl = monitor.get('ssl', {})
                 if ssl.get('product'):
                     ssl_expire = ssl['expires']
-                    metrics['ssl'](ssl_expire, labels)
+                    metrics['ssl'].add_metric(labels_values, ssl_expire)
 
-            metrics['scrape_duration_seconds'](time.time() - start)
+            metrics['scrape_duration_seconds'].add_metric([], time.time() - start)
+
             return metrics.values()
         except Exception:
             log.error('Error during collect', exc_info=True)
