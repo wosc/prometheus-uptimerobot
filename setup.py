@@ -9,7 +9,7 @@ setup(
     version='1.2.0.dev0',
 
     install_requires=[
-        'prometheus_client',
+        'prometheus_client>=0.4.0',
         'requests',
         'setuptools',
     ],

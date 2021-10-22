@@ -32,7 +32,8 @@ class Gauge(prometheus_client.core.GaugeMetricFamily):
         # add_metric() taking a list is not very pythonic, let's use a dict
         if labels is None:
             labels = {}
-        self.samples.append((self.name, labels, value))
+        self.samples.append(
+            prometheus_client.core.Sample(self.name, labels, value))
 
     def clone(self):
         return type(self)(self._name, self.documentation)
