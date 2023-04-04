@@ -1,5 +1,5 @@
+from unittest import mock
 import json
-import mock
 import pkg_resources
 import pytest
 import werkzeug.test
@@ -20,7 +20,7 @@ def fake_response():
 @pytest.fixture
 def testbrowser():
     return werkzeug.test.Client(
-        ws.prometheus_uptimerobot.web.APP, werkzeug.wrappers.BaseResponse)
+        ws.prometheus_uptimerobot.web.APP, werkzeug.wrappers.Response)
 
 
 def test_converts_api_data_to_metrics(fake_response, testbrowser):

@@ -1,3 +1,4 @@
+from configparser import ConfigParser
 import argparse
 import logging
 import os
@@ -10,10 +11,6 @@ import time
 import wsgiref.handlers
 import wsgiref.simple_server
 
-try:
-    from ConfigParser import ConfigParser
-except ImportError:
-    from configparser import ConfigParser
 
 log = logging.getLogger(__name__)
 LOG_FORMAT = '%(asctime)s %(levelname)-5.5s [%(name)s] %(message)s'
