@@ -3,6 +3,16 @@ CHANGES
 
 .. towncrier release notes start
 
+1.3.0 (2023-04-04)
+------------------
+
+Changes
++++++++
+
+- Drop Python-2 support (py2)
+- Switch from setup.py to pyproject.toml (wheel)
+
+
 1.2.0 (2021-10-22)
 ------------------
 
